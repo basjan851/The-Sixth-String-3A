@@ -1,6 +1,6 @@
 <div class="container my-5">
     <div class="text-center mb-5">
-        <h1>Welcome to The Sixth String</h1>
+        <h1></h1>
         <p class="lead">Discover the best guitars, accessories, and more for every music enthusiast.</p>
     </div>
     <div class="row">
