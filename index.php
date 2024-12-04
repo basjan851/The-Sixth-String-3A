@@ -7,7 +7,11 @@ function loadStaticPage($pageName) {
         include $filePath;
         return ob_get_clean();
     } else {
-        return "<h2>Page not found</h2>";
+        return '<div class="text-center">
+                    <h1 class="display-1 fw-bold text-danger">404</h1>
+                     <p class="fs-4 text-muted">Oops! De pagina die je probeert op te zoeken bestaat niet.</p>
+                     <a href="index.php?page=Home" class="btn btn-primary btn-lg">Terug</a>
+                </div>';
     }
 }
 
@@ -50,9 +54,9 @@ $content = loadStaticPage($page); // Statische pagina laden
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                <img src="assets/images/png-clipart-guitar.png" width="40" height="40" role="img">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="index.php?page=home" class="nav-link px-2 text-white">Home</a></li>
-                    <li><a href="index.php?page=producten" class="nav-link px-2 text-white">Producten</a></li>
-                    <li><a href="index.php?page=info" class="nav-link px-2 text-white">Over ons</a></li>
+                    <li><a href="index.php?page=Home" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="index.php?page=Producten" class="nav-link px-2 text-white">Producten</a></li>
+                    <li><a href="index.php?page=Info" class="nav-link px-2 text-white">Over ons</a></li>
                 </ul>
                 <!--zoek veld om producten te zoeken met breakpoints voor verschillende afmetingen-->
                 <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-3" role="search">
