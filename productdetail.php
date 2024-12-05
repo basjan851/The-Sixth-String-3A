@@ -99,8 +99,8 @@ if ($result->num_rows > 0) {
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <img src="./png-clipart-guitar.png" width="40" height="40" role="img">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Producten</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary">Producten</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Over ons</a></li>
                 </ul>
 
@@ -120,7 +120,7 @@ if ($result->num_rows > 0) {
 
     <main class="content">
         <div class="container standard-height">
-            <h3>Productdetail </h3>
+            <h3>Productdetails</h3>
             <h6>Home > Producten > <?php echo htmlspecialchars($product['Naam']); ?></h6>
             <div class="product-container">
                 <div class="product-image">
@@ -131,13 +131,32 @@ if ($result->num_rows > 0) {
                     <p><?php echo htmlspecialchars($product['Beschrijving']); ?></p>
                     <p class="prijs"><?php echo htmlspecialchars($product['Prijs']); ?></p>
                     <p>Voorraad: <?php echo htmlspecialchars($product['Voorraad']); ?></p>
-                    <button>In mijn Winkelwagen</button>
+                    <button>Toevoegen aan winkelwagen</button>
                 </div>
             </div>
     </main>
 
-    <footer class="bg-dark text-white p-4">
-        <p class="mb-0">Footer Content</p>
+    <footer class="bg-dark py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 d-flex align-items-center">
+                    <form class="d-flex w-100">
+                        <div class="col-12 col-lg-6 mb-2 mb-lg-0 me-lg-3">
+                            <input type="email" class="form-control " placeholder="e-mail adres voor nieuwsbrief">
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Verstuur</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Contact</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Privacy beleid</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Algemene voorwaarden</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Retourbeleid</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <div>
