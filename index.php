@@ -1,24 +1,5 @@
 <?php
-// Functie om statische pagina's te laden
-function loadStaticPage($pageName) {
-    $filePath = __DIR__ . "/pages/{$pageName}.php";
-    if (file_exists($filePath)) {
-        ob_start(); //ik start hier een buffer zodat de pagina's snel ingeladen worden.
-        include $filePath;
-        return ob_get_clean();
-    } else {
-        return '<div class="text-center">
-                    <h1 class="display-1 fw-bold text-danger">404</h1>
-                     <p class="fs-4 text-muted">Oops! De pagina die je probeert op te zoeken bestaat niet.</p>
-                     <a href="index.php?page=Home" class="btn btn-primary btn-lg">Terug</a>
-                </div>';
-    }
-}
-
-// Inhoud bepalen
-$page = $_GET['page'] ?? 'home'; // Standaardpagina instellen
-$content = loadStaticPage($page); // Statische pagina laden
-
+include(__DIR__ . '/router.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +33,7 @@ $content = loadStaticPage($page); // Statische pagina laden
     <header class="p-3 text-bg-dark">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-               <img src="assets/images/png-clipart-guitar.png" width="40" height="40" role="img">
+               <img alt="logo" src="assets/images/png-clipart-guitar.png" width="40" height="40" role="img">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="index.php?page=Home" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="index.php?page=Producten" class="nav-link px-2 text-white">Producten</a></li>
