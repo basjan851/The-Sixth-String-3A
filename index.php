@@ -1,5 +1,17 @@
 <?php
-include(__DIR__ . '/router.php');
+require_once 'router.php';
+
+// Haal de pagina-parameter op uit de URL
+$page = isset($_GET['page']) ? $_GET['page'] : 'Home';
+
+// Start output buffering om de content op te vangen
+ob_start();
+
+// Roep de router aan om de content te genereren
+router($page);
+
+// Sla de gegenereerde inhoud op in een variabele
+$content = ob_get_clean();
 ?>
 <!DOCTYPE html>
 <html lang="en">
