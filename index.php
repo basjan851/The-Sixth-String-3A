@@ -98,7 +98,7 @@ $content = loadStaticPage($page); // Statische pagina laden
                 </div>
                 <div class="col-md-6">
                     <ul class="nav justify-content-end">
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Contact</a></li>
+                        <li class="nav-item"><a href="index.php?page=Productdetail" class="nav-link px-2 text-white">Contact</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Privacy beleid</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Alegemene voorwaarden</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Retourbeleid</a></li>
