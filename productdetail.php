@@ -16,6 +16,11 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $product = $result->fetch_assoc();
+
+    // Controleer op korting en bereken de nieuwe prijs
+    $oudePrijs = $product['Prijs'];
+    $korting = isset($product['Korting']) ? $product['Korting'] : 0; // Verwacht percentage
+    $nieuwePrijs = $korting > 0 ? $oudePrijs * ((100 - $korting) / 100) : $oudePrijs;
 } else {
     die("Product niet gevonden.");
 }
@@ -87,7 +92,12 @@ if ($result->num_rows > 0) {
             padding: 10px 20px;
             cursor: pointer;
         }
-        .product-details button:hover {
+        .product-details button.disabled {
+            background-color: #CCCCCC;
+            color: #666666;
+            cursor: not-allowed;
+        }
+        .product-details button:hover:not(.disabled) {
             background-color: #0056b3;
         }
     </style>
@@ -129,9 +139,30 @@ if ($result->num_rows > 0) {
                 <div class="product-details">
                     <h1><?php echo htmlspecialchars($product['Naam']); ?></h1>
                     <p><?php echo htmlspecialchars($product['Beschrijving']); ?></p>
-                    <p class="prijs"><?php echo htmlspecialchars($product['Prijs']); ?></p>
-                    <p>Voorraad: <?php echo htmlspecialchars($product['Voorraad']); ?></p>
-                    <button>Toevoegen aan winkelwagen</button>
+                    <p class="prijs">
+                        <?php if ($korting > 0): ?>
+                            <span style="text-decoration: line-through; color: gray;">€<?php echo number_format($oudePrijs, 2, ',', '.'); ?></span>
+                            <span>€<?php echo number_format($nieuwePrijs, 2, ',', '.'); ?></span>
+                        <?php else: ?>
+                            €<?php echo number_format($oudePrijs, 2, ',', '.'); ?>
+                        <?php endif; ?>
+                    </p>
+
+                    <p>
+                        Voorraad:
+                        <?php
+                        if ($product['Voorraad'] > 0) {
+                            echo htmlspecialchars($product['Voorraad']);
+                        } else {
+                            echo "<span style='color: red;'>Uitverkocht</span>";
+                        }
+                        ?>
+                    </p>
+                    <button
+                            class="<?php echo $product['Voorraad'] == 0 ? 'disabled' : ''; ?>"
+                        <?php echo $product['Voorraad'] == 0 ? 'disabled' : ''; ?>>
+                        In mijn Winkelwagen
+                    </button>
                 </div>
             </div>
     </main>
