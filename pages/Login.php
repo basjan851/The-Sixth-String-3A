@@ -84,7 +84,7 @@
                 <label for="password">Wachtwoord</label>
                 <input type="password" id="password" name="password" placeholder="" required>
                 <div style="text-align: center;">
-                    <a class="formbutton" href="/index.php?page=Registreren" style="background-color: grey">Registreren</a>
+                    <a class="formbutton" href="index.php?page=Registreren" style="background-color: grey">Registreren</a>
                     <button class="formbutton" type="submit">Inloggen</button>
                 </div>
             </div>

@@ -89,7 +89,7 @@
                 <label for="password">Bevestig wachtwoord</label>
                 <input type="password" id="passwordverify" name="passwordverify" placeholder="" required>
                 <div style="text-align: center;">
-                    <a class="formbutton" href="/index.php?page=Home" style="background-color: orange; color: white; float: left">Terug</a>
+                    <a class="formbutton" href="index.php?page=Home" style="background-color: orange; color: white; float: left">Terug</a>
                     <button class="formbutton" type="submit" style="background-color: gray; color: white; float: right">Account Aanmaken</button>
                 </div>
             </div>
