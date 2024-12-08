@@ -20,7 +20,6 @@ if (!empty($_POST["email"]) && !empty($_POST["password"] && !empty($_POST["passw
     $verkey = md5(uniqid()) . md5(uniqid());
     //Add user to database while keeping it inactive and generate a random 64 length string as verification key
     $query = sprintf("INSERT INTO gebruikers (email, wachtwoord, rol, actief, verificatie_key) VALUES ('%s', '%s', 0, false, '%s')", $email, $passwordhash, $verkey);
-    echo $query;
     $dbcon->query(query: $query);
     header('Location: /index.php?page=Registreren&rs=1', true, 302);
 } else {
