@@ -1,16 +1,8 @@
 <?php
 require_once 'router.php';
-
-// Haal de pagina-parameter op uit de URL
 $page = isset($_GET['page']) ? $_GET['page'] : 'Home';
-
-// Start output buffering om de content op te vangen
 ob_start();
-
-// Roep de router aan om de content te genereren
 router($page);
-
-// Sla de gegenereerde inhoud op in een variabele
 $content = ob_get_clean();
 ?>
 <!DOCTYPE html>
@@ -71,7 +63,6 @@ $content = ob_get_clean();
     <main class="content">
         <div class="container standard-height">
             <h3 class="p-2"><?php print $page;?></h3>
-            <h6 class="p-2">Bread>Crumbs>Homepage</h6>
             <?= $content ?>
 
         </div>
