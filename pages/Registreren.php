@@ -68,24 +68,29 @@
     }
 </style>
 <div id="formparent">
-    <form id="loginform" action="/api/login.php" method="POST">
+    <form id="loginform" action="/api/register.php" method="POST">
+        <center>
+        <h3>Nieuw account aanmaken</h3>
+        </center>
         <?php
         include(__DIR__.'/../helpers/alertrenderer.php');
         render_alerts(alerts: [
-            array('trigger'=>'iw','type'=>'va-error','melding'=>'Ongeldige login of wachtwoord.'),
-            array('trigger'=>'im','type'=>'va-warning','melding'=>'Door inactiviteit bent u automatisch uitgelogd. Log opnieuw in om verder te gaan.'),
-            array('trigger'=>'ag','type'=>'va-warning','melding'=>'Account is geactiveerd, u kunt nu inloggen.')
+            array('trigger'=>'ie','type'=>'va-error','melding'=>'E-mailadres is al in gebruik'),
+            array('trigger'=>'ir','type'=>'va-error','melding'=>'Wachtwoorden komen niet overeen'),
+            array('trigger'=>'rs','type'=>'va-warning','melding'=>'Volg de link in uw e-mail inbox om de registratie te voltooien.'),
         ]);
         ?>
         <center>
             <div style="max-width: 20vw;">
                 <label for="email">E-mailadres</label>
-                <input type="text" id="email" name="email" placeholder="" required>
+                <input type="text" id="first" name="email" placeholder="" required>
                 <label for="password">Wachtwoord</label>
                 <input type="password" id="password" name="password" placeholder="" required>
+                <label for="password">Bevestig wachtwoord</label>
+                <input type="password" id="passwordverify" name="passwordverify" placeholder="" required>
                 <div style="text-align: center;">
-                    <a class="formbutton" href="/index.php?page=Registreren" style="background-color: grey">Registreren</a>
-                    <button class="formbutton" type="submit">Inloggen</button>
+                    <a class="formbutton" href="/index.php?page=Home" style="background-color: orange; color: white; float: left">Terug</a>
+                    <button class="formbutton" type="submit" style="background-color: gray; color: white; float: right">Account Aanmaken</button>
                 </div>
             </div>
         </center>
