@@ -24,5 +24,6 @@ if (!empty($_POST["email"]) && !empty($_POST["password"] && !empty($_POST["passw
     header('Location: /index.php?page=Registreren&rs=1', true, 302);
 } else {
     header('HTTP/1.1 400 Bad Request', true, 400);
+    echo "<h1>400 Bad Request</h1>";
 }
 ?>

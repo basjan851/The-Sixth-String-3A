@@ -9,8 +9,10 @@ if (!empty($_GET["key"])) {
         header('Location: /index.php?page=Login&ag=1', true, 302);
     } else {
         header(header: 'HTTP/1.1 400 Bad Request', replace: true, response_code: 400);
+        echo "<h1>400 Bad Request</h1>";
     }
 } else {
     header(header: 'HTTP/1.1 400 Bad Request', replace: true, response_code: 400);
+    echo "<h1>400 Bad Request</h1>";
 }
 ?>
