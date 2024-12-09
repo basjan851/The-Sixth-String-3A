@@ -1,18 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "dummydatabase";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Verbinding mislukt: " . $conn->connect_error);
-}
+require_once 'helpers/database.php';
 
 $Id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Default productId is 1
 $sql = "SELECT * FROM producten WHERE Id = $Id";
-$result = $conn->query($sql);
+$result = connect_db()->query($sql);
 
 if ($result->num_rows > 0) {
     $product = $result->fetch_assoc();
