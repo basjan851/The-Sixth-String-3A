@@ -97,7 +97,7 @@ create index product_id
 
 create table rollen
 (
-    id           int auto_increment
+    id           int
         primary key,
     naam         varchar(50)  not null,
     beschrijving varchar(255) null
@@ -108,7 +108,7 @@ create table gebruikers
     id         int auto_increment
         primary key,
     email      varchar(255) not null,
-    wachtwoord varchar(50)  not null,
+    wachtwoord varchar(255)  not null,
     rol        int          not null,
     actief     tinyint(1)   not null,
     constraint gebruikers_ibfk_1

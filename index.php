@@ -42,6 +42,7 @@ $content = loadStaticPage($page); // Statische pagina laden
             flex: 1; /* zorgt ervoor dat de header en footer boven en onder blijven staan*/
         }
         .standard-height {
+            height: 600px;
             min-height: 600px; /* Astandaard hoogte */
         }
     </style>
