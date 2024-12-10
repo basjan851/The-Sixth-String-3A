@@ -1,6 +1,6 @@
 <?php
 
-require_once 'helpers/database.php';
+require_once '../helpers/databaseconnector.php';
 
 $Id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Default productId is 1
 $sql = "SELECT * FROM producten WHERE Id = $Id";
