@@ -1,25 +1,17 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "dummydatabase";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Verbinding mislukt: " . $conn->connect_error);
-}
+require_once '../helpers/databaseconnector.php';
 
 $Id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Default productId is 1
 $sql = "SELECT * FROM producten WHERE Id = $Id";
-$result = $conn->query($sql);
+$result = connect_db()->query($sql);
 
 if ($result->num_rows > 0) {
     $product = $result->fetch_assoc();
 
     // Controleer op korting en bereken de nieuwe prijs
-    $oudePrijs = $product['Prijs'];
-    $korting = isset($product['Korting']) ? $product['Korting'] : 0; // Verwacht percentage
+    $oudePrijs = $product['prijs'];
+    $korting = isset($product['kortingspercentage']) ? $product['kortingspercentage'] : 0; // Verwacht percentage
     $nieuwePrijs = $korting > 0 ? $oudePrijs * ((100 - $korting) / 100) : $oudePrijs;
 } else {
     die("Product niet gevonden.");
@@ -32,7 +24,7 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title><?php echo htmlspecialchars($product['Naam']); ?></title>
+    <title><?php echo htmlspecialchars($product['productnaam']); ?></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -107,14 +99,14 @@ if ($result->num_rows > 0) {
     <main class="content">
         <div class="container standard-height">
             <h3>Productdetails</h3>
-            <h6>Home > Producten > <?php echo htmlspecialchars($product['Naam']); ?></h6>
+            <h6>Home > Producten > <?php echo htmlspecialchars($product['productnaam']); ?></h6>
             <div class="product-container">
                 <div class="product-image">
                     <p>Afbeelding hier</p>
                 </div>
                 <div class="product-details">
-                    <h1><?php echo htmlspecialchars($product['Naam']); ?></h1>
-                    <p><?php echo htmlspecialchars($product['Beschrijving']); ?></p>
+                    <h1><?php echo htmlspecialchars($product['productnaam']); ?></h1>
+                    <p><?php echo htmlspecialchars($product['beschrijving']); ?></p>
                     <p class="prijs">
                         <?php if ($korting > 0): ?>
                             <span style="text-decoration: line-through; color: gray;">€<?php echo number_format($oudePrijs, 2, ',', '.'); ?></span>
@@ -127,16 +119,16 @@ if ($result->num_rows > 0) {
                     <p>
                         Voorraad:
                         <?php
-                        if ($product['Voorraad'] > 0) {
-                            echo htmlspecialchars($product['Voorraad']);
+                        if ($product['voorraad'] > 0) {
+                            echo htmlspecialchars($product['voorraad']);
                         } else {
                             echo "<span style='color: red;'>Uitverkocht</span>";
                         }
                         ?>
                     </p>
                     <button
-                            class="<?php echo $product['Voorraad'] == 0 ? 'disabled' : ''; ?>"
-                        <?php echo $product['Voorraad'] == 0 ? 'disabled' : ''; ?>>
+                            class="<?php echo $product['voorraad'] == 0 ? 'disabled' : ''; ?>"
+                        <?php echo $product['voorraad'] == 0 ? 'disabled' : ''; ?>>
                         In mijn Winkelwagen
                     </button>
                 </div>
