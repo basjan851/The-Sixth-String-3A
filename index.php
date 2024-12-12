@@ -24,6 +24,7 @@ $content = ob_get_clean();
         }
         .content {
             flex: 1; /* zorgt ervoor dat de header en footer boven en onder blijven staan*/
+            overflow-y: auto;
         }
         .standard-height {
             height: 600px;
@@ -73,19 +74,23 @@ $content = ob_get_clean();
     <footer class="bg-dark py-3">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 d-flex align-items-center">
-                    <form class="d-flex w-100">
-                        <div class="col-12 col-lg-6 mb-2 mb-lg-0 me-lg-3">
-                            <input type="email" class="form-control " placeholder="e-mail adres voor nieuwsbrief">
+                <div class="col-md-6">
+                    <form class="row g-2">
+                        <!-- Input veld -->
+                        <div class="col-12 col-md-8">
+                            <input type="email" class="form-control" placeholder="e-mail adres voor nieuwsbrief">
                         </div>
-                        <button type="submit" class="btn btn-secondary">Verstuur</button>
+                        <!-- Knop -->
+                        <div class="col-12 col-md-2">
+                            <button type="submit" class="btn btn-secondary w-100">Verstuur</button>
+                        </div>
                     </form>
                 </div>
                 <div class="col-md-6">
                     <ul class="nav justify-content-end">
                         <li class="nav-item"><a href="index.php?page=Productdetail" class="nav-link px-2 text-white">Contact</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Privacy beleid</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Alegemene voorwaarden</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Algemene voorwaarden</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Retourbeleid</a></li>
                     </ul>
                 </div>
