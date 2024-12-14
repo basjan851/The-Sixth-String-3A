@@ -27,7 +27,6 @@ $content = ob_get_clean();
             overflow-y: auto;
         }
         .standard-height {
-            height: 600px;
             min-height: 600px; /* Astandaard hoogte */
         }
     </style>
