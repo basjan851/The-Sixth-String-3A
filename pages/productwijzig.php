@@ -94,13 +94,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background-color: #f0f0f0;
         }
         .button {
-            padding: 10px 15px;
             background-color: #5cb85c;
+            padding: 10px 15px;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
+            height: 40px;
+            width: 110px;
+            display: inline-block;
+            text-align: center;
         }
         .button:hover {
             background-color: #4cae4c;
@@ -144,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="text" name="productnaam" value="<?= htmlspecialchars($product['productnaam']) ?>"><br><br>
 
                     <label>Beschrijving:</label><br>
-                    <textarea name="beschrijving" rows="4" cols="75"><?= htmlspecialchars($product['beschrijving']) ?></textarea><br><br>
+                    <textarea name="beschrijving" rows="4" cols="50"><?= htmlspecialchars($product['beschrijving']) ?></textarea><br><br>
 
                     <label>Prijs:</label><br>
                     <input type="text" name="prijs" value="<?= htmlspecialchars($product['prijs']) ?>"><br><br>
@@ -159,10 +163,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="checkbox" name="actief" <?= $product['actief'] ? 'checked' : '' ?>><br><br>
 
                     <button type="submit" class="button">Opslaan</button>
-                    <a href="./productbeheer.php" class="cancel-button">Annuleren</a>
+                    <a href="./productbeheer.php" class="button cancel-button">Annuleren</a>
                 </form>
             <?php else: ?>
-                <a href="./productbeheer.php" class="cancel-button">Terug</a>
+                <a href="./productbeheer.php" class="button cancel-button">Terug</a>
             <?php endif; ?>
         </div>
 
