@@ -52,8 +52,12 @@
             $totaal = $dbcon->query("SELECT SUM(p.prijs*w.aantal) as totale_prijs, SUM((p.prijs*(p.kortingspercentage/100))*w.aantal) as totale_korting  from winkelwagen w INNER JOIN producten p ON w.product_id = p.id WHERE w.gebruiker_id = '" . $gebruikerid . "' GROUP BY gebruiker_id");
             if ($totaal->num_rows > 0) {
                 $totaal = $totaal->fetch_assoc();
-                $producten = $dbcon->query("SELECT p.productnaam as productnaam, p.prijs*w.aantal as prijs, (p.prijs*(p.kortingspercentage/100))*w.aantal as korting, w.aantal from winkelwagen w INNER JOIN producten p ON w.product_id = p.id WHERE w.gebruiker_id = '" . $gebruikerid . "'");
-                return Array("totale_prijs" => $totaal["totale_prijs"], "totale_korting" => $totaal["totale_korting"], "producten" => $producten->fetch_assoc());    
+                $producten = $dbcon->query("SELECT p.id as id, p.productnaam as productnaam, p.prijs*w.aantal as prijs, (p.prijs*(p.kortingspercentage/100))*w.aantal as korting, w.aantal from winkelwagen w INNER JOIN producten p ON w.product_id = p.id WHERE w.gebruiker_id = '" . $gebruikerid . "'");
+                $p = array();
+                while ($row = $producten->fetch_assoc()) {
+                    $p[array_shift($row)] = $row;
+                }
+                return Array("totale_prijs" => $totaal["totale_prijs"], "totale_korting" => $totaal["totale_korting"], "producten" => $p);    
             } else {
                 return false;
             }
