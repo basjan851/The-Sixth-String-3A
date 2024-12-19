@@ -51,9 +51,11 @@ $content = ob_get_clean();
                 <div class="d-flex align-items-center text-end">
                     <button type="button" class="btn btn-secondary me-3">Afmelden</button>
                     <a href="index.php?page=login" class="btn btn-warning me-3 text-white">Aanmelden</a>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                    </svg>
+                    <a class="icon link mb-2" href="index.php?page=Winkelwagen">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -87,9 +89,9 @@ $content = ob_get_clean();
                 <div class="col-md-6">
                     <ul class="nav justify-content-end">
                         <li class="nav-item"><a href="index.php?page=Productdetail" class="nav-link px-2 text-white">Contact</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Privacy beleid</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Algemene voorwaarden</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Retourbeleid</a></li>
+                        <li class="nav-item"><a href="index.php?page=Privacy beleid" class="nav-link px-2 text-white">Privacy beleid</a></li>
+                        <li class="nav-item"><a href="index.php?page=Algemene voorwaarden" class="nav-link px-2 text-white">Algemene voorwaarden</a></li>
+                        <li class="nav-item"><a href="index.php?page=Retourbeleid" class="nav-link px-2 text-white">Retourbeleid</a></li>
                     </ul>
                 </div>
             </div>

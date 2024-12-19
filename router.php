@@ -21,7 +21,7 @@ if ($dynamicPage = getDynamicPage($page)) {
 function getDynamicPage($page) {
 $db = connect_db(); // Maak verbinding met de database
 
-// SQL-query aangepast voor dynamische_pagina-tabel
+// SQL-query aangepast voor dynamische_pagina
 $stmt = $db->prepare("SELECT inhoud FROM dynamische_pagina WHERE title = ? AND actief = 1");
 if (!$stmt) {
     die("Query voorbereiding mislukt: " . $db->error);
@@ -29,9 +29,11 @@ if (!$stmt) {
 
 // Bind de parameter
 $stmt->bind_param("s", $page);
+// ^voorkomt een sql injectie door de page als data te zien en niet als code.
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
+// ^dit haalt de data op in een associative manier en geeft het terug als een array.
 return $row ? $row : null;
 }
 ?>
