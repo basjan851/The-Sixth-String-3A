@@ -26,7 +26,6 @@ $content = ob_get_clean();
             flex: 1; /* zorgt ervoor dat de header en footer boven en onder blijven staan*/
         }
         .standard-height {
-            height: 600px;
             min-height: 600px; /* Astandaard hoogte */
         }
     </style>
@@ -51,7 +50,7 @@ $content = ob_get_clean();
 
                 <div class="d-flex align-items-center text-end">
                     <button type="button" class="btn btn-secondary me-3">Afmelden</button>
-                    <button type="button" class="btn btn-warning me-3">Aanmelden</button>
+                    <button type="button"  class="btn btn-warning me-3">Aanmelden</button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                     </svg>
@@ -63,7 +62,7 @@ $content = ob_get_clean();
     <!-- Content -->
     <main class="content">
         <div class="container standard-height">
-            <h3 class="p-2"><?php print $page;?></h3>
+            <h3 class="pt-2"><?php print $page;?></h3>
             <?= $content ?>
 
         </div>
@@ -73,19 +72,23 @@ $content = ob_get_clean();
     <footer class="bg-dark py-3">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 d-flex align-items-center">
-                    <form class="d-flex w-100">
-                        <div class="col-12 col-lg-6 mb-2 mb-lg-0 me-lg-3">
-                            <input type="email" class="form-control " placeholder="e-mail adres voor nieuwsbrief">
+                <div class="col-md-6">
+                    <form class="row g-2">
+                        <!-- Input veld -->
+                        <div class="col-12 col-md-8">
+                            <input type="email" class="form-control" placeholder="e-mail adres voor nieuwsbrief">
                         </div>
-                        <button type="submit" class="btn btn-secondary">Verstuur</button>
+                        <!-- Knop -->
+                        <div class="col-12 col-md-2">
+                            <button type="submit" class="btn btn-secondary w-100">Verstuur</button>
+                        </div>
                     </form>
                 </div>
                 <div class="col-md-6">
                     <ul class="nav justify-content-end">
                         <li class="nav-item"><a href="index.php?page=Productdetail" class="nav-link px-2 text-white">Contact</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Privacy beleid</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Alegemene voorwaarden</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Algemene voorwaarden</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Retourbeleid</a></li>
                     </ul>
                 </div>
