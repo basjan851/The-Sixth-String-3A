@@ -42,6 +42,7 @@ $content = ob_get_clean();
                     <li><a href="index.php?page=Home" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="index.php?page=Producten" class="nav-link px-2 text-white">Producten</a></li>
                     <li><a href="index.php?page=Info" class="nav-link px-2 text-white">Over ons</a></li>
+                    <li><a href="index.php?page=beheerpaginas/productwijzig" class="nav-link px-2 text-white">product wijzig</a></li>
                 </ul>
                 <!--zoek veld om producten te zoeken met breakpoints voor verschillende afmetingen-->
                 <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-3" role="search">
