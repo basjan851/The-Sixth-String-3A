@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../helpers/databaseconnector.php');
+//include(__DIR__ . '/../helpers/databaseconnector.php');
 $dbcon = connect_db();
 //Generate list with current pages
 $result = $dbcon->query('SELECT id,title,actief FROM dynamische_pagina');

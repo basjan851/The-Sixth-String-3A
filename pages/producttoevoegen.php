@@ -1,6 +1,6 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
+//require_once '../helpers/databaseconnector.php';
 $conn = connect_db();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

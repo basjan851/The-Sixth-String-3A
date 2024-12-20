@@ -1,6 +1,6 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
+//require_once '../helpers/databaseconnector.php';
 $conn = connect_db();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -159,10 +159,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="checkbox" name="actief" <?= $product['actief'] ? 'checked' : '' ?>><br><br>
 
                     <button type="submit" class="button">Opslaan</button>
-                    <a href="./productbeheer.php" class="cancel-button">Annuleren</a>
+                    <a href="index.php?page=productbeheer" class="cancel-button">Annuleren</a>
                 </form>
             <?php else: ?>
-                <a href="./productbeheer.php" class="cancel-button">Terug</a>
+                <a href="index.php?page=productbeheer" class="cancel-button">Terug</a>
             <?php endif; ?>
         </div>
 

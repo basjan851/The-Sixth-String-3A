@@ -1,6 +1,6 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
+//require_once '../helpers/databaseconnector.php';
 $conn = connect_db();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["update_actief"])) {
@@ -154,12 +154,12 @@ if (!$result) {
                                     <input type="hidden" name="id" value="<?= $row["id"] ?>">
                                     <button type="submit" name="action" value="delete" class="button button-delete">Verwijderen</button>
                                 </form>
-                                <a href="productwijzig.php?id=<?= $row['id'] ?>" class="button button-edit">Bewerken</a>
+                                <a href="/index.php?page=productwijzig&id=<?= $row['id'] ?>" class="button button-edit">Bewerken</a>
                             </td>
                         </tr>
                     <?php } } ?>
                 </table>
-                <a href="producttoevoegen.php" class="button-add">Toevoegen</a>
+                <a href="/index.php?page=producttoevoegen" class="button-add">Toevoegen</a>
             </div>
         </div>
     </main>
