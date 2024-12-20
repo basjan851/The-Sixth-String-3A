@@ -1,7 +1,5 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
-
 $Id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Default productId is 1
 $sql = "SELECT * FROM producten WHERE Id = $Id";
 $result = connect_db()->query($sql);
@@ -38,7 +36,7 @@ if ($result->num_rows > 0) {
             flex: 1;
         }
         .wrapper {
-            min-height: 100vh;
+            min-height: 50vh;
             display: flex;
             flex-direction: column;
         }
@@ -98,7 +96,6 @@ if ($result->num_rows > 0) {
 <div class="wrapper">
     <main class="content">
         <div class="container standard-height">
-            <h3>Productdetails</h3>
             <h6>Home > Producten > <?php echo htmlspecialchars($product['productnaam']); ?></h6>
             <div class="product-container">
                 <div class="product-image">

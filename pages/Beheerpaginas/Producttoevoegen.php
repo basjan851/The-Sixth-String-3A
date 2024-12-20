@@ -1,6 +1,5 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
 $conn = connect_db();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -75,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="wrapper">
     <main class="content">
         <div class="container standard-height">
-            <h3 class="p-2">Product toevoegen</h3>
             <h6 class="p-2">Beheer>Producten>Toevoegen</h6>
 
             <?php if (!empty($message)): ?>
@@ -110,8 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-check-label" for="actief">Actief</label>
                 </div>
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-primary">Toevoegen</button>
-                    <a href="./productbeheer.php" class="btn btn-danger">Annuleren</a>
+                    <button href="index.php?page=beheerpaginas/Productbeheer" type="submit" class="btn btn-primary">Toevoegen</button>
+                    <a href="index.php?page=beheerpaginas/Productbeheer" class="btn btn-danger">Annuleren</a>
                 </div>
 
             </form>

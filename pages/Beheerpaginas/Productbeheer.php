@@ -1,6 +1,5 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
 $conn = connect_db();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["update_actief"])) {
@@ -55,7 +54,7 @@ if (!$result) {
             flex: 1;
         }
         .wrapper {
-            min-height: 100vh;
+            min-height: 10vh;
             display: flex;
             flex-direction: column;
         }
@@ -124,7 +123,6 @@ if (!$result) {
 
     <main class="content">
         <div class="container standard-height">
-            <h3>Productbeheer</h3>
             <h6>Home > Beheer > Producten</h6>
             <div class="container">
                 <table>
@@ -154,12 +152,12 @@ if (!$result) {
                                     <input type="hidden" name="id" value="<?= $row["id"] ?>">
                                     <button type="submit" name="action" value="delete" class="button button-delete">Verwijderen</button>
                                 </form>
-                                <a href="productwijzig.php?id=<?= $row['id'] ?>" class="button button-edit">Bewerken</a>
+                                <a href="index.php?page=beheerpaginas/productwijzig&id=<?= $row['id'] ?>" class="button button-edit">Bewerken</a>
                             </td>
                         </tr>
                     <?php } } ?>
                 </table>
-                <a href="producttoevoegen.php" class="button-add">Toevoegen</a>
+                <a href="index.php?page=beheerpaginas/Producttoevoegen" class="button-add">Toevoegen</a>
             </div>
         </div>
     </main>

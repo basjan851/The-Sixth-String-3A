@@ -1,6 +1,5 @@
 <?php
 
-require_once '../helpers/databaseconnector.php';
 $conn = connect_db();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -22,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 WHERE Id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: ./productbeheer.php");
+        header("Location: index.php?page=beheerpaginas/Productbeheer");
         exit();
     } else {
         echo "<p class='error-message'>Fout bij bijwerken: " . $conn->error . "</p>";
@@ -55,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             flex: 1;
         }
         .wrapper {
-            min-height: 100vh;
+            min-height: 74vh;
             display: flex;
             flex-direction: column;
         }
@@ -159,10 +158,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="checkbox" name="actief" <?= $product['actief'] ? 'checked' : '' ?>><br><br>
 
                     <button type="submit" class="button">Opslaan</button>
-                    <a href="./productbeheer.php" class="cancel-button">Annuleren</a>
+                    <a href="index.php?page=beheerpaginas/Productbeheer" class="cancel-button">Annuleren</a>
                 </form>
             <?php else: ?>
-                <a href="./productbeheer.php" class="cancel-button">Terug</a>
+                <a href="index.php?page=beheerpaginas/Productbeheer" class="cancel-button">Terug</a>
             <?php endif; ?>
         </div>
 
