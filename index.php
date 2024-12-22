@@ -39,7 +39,8 @@ $content = loadStaticPage($page); // Statische pagina laden
             flex-direction: column;
         }
         .content {
-            flex: 1; /* zorgt ervoor dat de header en footer boven en onder blijven staan*/
+            flex: 1;
+            overflow: auto;/* zorgt ervoor dat de header en footer boven en onder blijven staan*/
         }
         .standard-height {
             height: 600px;
