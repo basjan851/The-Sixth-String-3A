@@ -1,5 +1,4 @@
 <?php
-
 $conn = connect_db();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["update_actief"])) {
@@ -42,23 +41,9 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Productbeheer</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #F9F9F9;
-        }
         main {
             padding: 20px;
-            flex: 1;
-        }
-        .wrapper {
-            min-height: 10vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .content {
             flex: 1;
         }
         table {
@@ -119,12 +104,9 @@ if (!$result) {
     </style>
 </head>
 <body>
-<div class="wrapper">
-
-    <main class="content">
-        <div class="container standard-height">
-            <h6>Home > Beheer > Producten</h6>
-            <div class="container">
+    <main>
+        <h6>Home > Beheer > Producten</h6>
+            <div>
                 <table>
                     <tr>
                         <th>Naam</th>
@@ -159,10 +141,6 @@ if (!$result) {
                 </table>
                 <a href="index.php?page=beheerpaginas/Producttoevoegen" class="button-add">Toevoegen</a>
             </div>
-        </div>
     </main>
-
-    <div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

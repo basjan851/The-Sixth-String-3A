@@ -10,7 +10,10 @@ if (!empty($_POST["email"]) && !empty($_POST["password"])) {
         if (password_verify($_POST["password"], $user["wachtwoord"])) {
             session_start();
             session_regenerate_id();
-            $_SESSION["user"] = $user;
+            $_SESSION["user"] = [
+                "id" => $user["id"],
+                "role" => $user["rol"], // Map het databaseveld 'rol' naar 'role'
+            ];
             header('Location: /index.php?page=Home', true, 302);
             exit();
         }
