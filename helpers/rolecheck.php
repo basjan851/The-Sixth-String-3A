@@ -7,8 +7,8 @@ function set_header($redirect_to_login) {
         echo "<h1>401 Unauthorized</h1>";
     }
 }
-function check_role($roles, $redirect_to_login) {
-    session_start();
+function check_role($roles, $redirect_to_login)
+{
     if (isset($_SESSION["user"]["rol"])) {
         $role = $_SESSION["user"]["rol"];
         if (!in_array($role, $roles)) {
@@ -19,5 +19,15 @@ function check_role($roles, $redirect_to_login) {
         set_header($redirect_to_login);
         exit();
     }
+}
+function getAllowedPages($role) {
+    $rolePages = [
+        1 => ['Paginaeditor','Productbeheer'],                     // webredacteur
+        2 => ['Bestelpagina'],                                      // Logistiek medewerker
+        3 => ['Productbeheer'],                                      // Klanten service medewerker
+        4 => ['Winkelwagen', 'Bestelpagina'],                       // CTO (Technische dericteur)
+        5 => ['Productbeheer', 'Producttoevoegen', 'Paginaeditor'],                 // algemeen beheerder
+    ];
+    return $rolePages[$role] ?? []; // Retourneer lege array als de rol onbekend is
 }
 ?>

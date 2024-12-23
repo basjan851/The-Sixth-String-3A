@@ -1,5 +1,4 @@
 <?php
-
 $conn = connect_db();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,55 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Sixth String</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        html, body {
-            height: 100%;
-        }
-        .wrapper {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .button {
-            padding: 10px 15px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            height: 40px;
-            width: 110px;
-            display: inline-block;
-            text-align: center;
-        }
-        .content {
-            flex: 1;
-        }
-        .standard-height {
-            height: 600px;
-            min-height: 600px;
-        }
-        .cancel-button {
-            padding: 10px 15px;
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .cancel-button:hover {
-            background-color: #c9302c;
-        }
-    </style>
 </head>
 <body>
-<div class="wrapper">
-    <main class="content">
-        <div class="container standard-height">
-            <h6 class="p-2">Beheer>Producten>Toevoegen</h6>
+    <h6 class="p-2">Beheer>Producten>Toevoegen</h6>
 
             <?php if (!empty($message)): ?>
                 <div class="alert alert-info">
@@ -113,11 +66,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
             </form>
-
-        </div>
-    </main>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    </body>
 </html>
