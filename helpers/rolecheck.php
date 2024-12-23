@@ -1,7 +1,7 @@
 <?php
 function set_header($redirect_to_login) {
     if ($redirect_to_login) {
-        header('Location: ./index.php?page=Login', true, 302);
+        header('Location: /index.php?page=Login', true, 302);
     } else {
         header('HTTP/1.1 401 Unauthorized', true, response_code: 401);
         echo "<h1>401 Unauthorized</h1>";
