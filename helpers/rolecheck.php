@@ -26,7 +26,7 @@ function getAllowedPages($role) {
         2 => ['Bestelpagina'],                                      // Logistiek medewerker
         3 => ['Productbeheer'],                                      // Klanten service medewerker
         4 => ['Winkelwagen', 'Bestelpagina'],                       // CTO (Technische dericteur)
-        5 => ['Productbeheer', 'Producttoevoegen', 'Paginaeditor'],                 // algemeen beheerder
+        5 => ['Productbeheer', 'Producttoevoegen', 'Paginaeditor', 'Bestellingbeheer'],                 // algemeen beheerder
     ];
     return $rolePages[$role] ?? []; // Retourneer lege array als de rol onbekend is
 }
