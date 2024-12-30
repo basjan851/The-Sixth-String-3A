@@ -23,7 +23,7 @@ function check_role($roles, $redirect_to_login)
 function getAllowedPages($role) {
     $rolePages = [
         1 => ['Paginaeditor','Productbeheer'],                     // webredacteur
-        2 => ['Bestelpagina'],                                      // Logistiek medewerker
+        2 => ['Bestelpagina', 'Bestellingbeheer'],                                      // Logistiek medewerker
         3 => ['Productbeheer'],                                      // Klanten service medewerker
         4 => ['Winkelwagen', 'Bestelpagina'],                       // CTO (Technische dericteur)
         5 => ['Productbeheer', 'Producttoevoegen', 'Paginaeditor', 'Bestellingbeheer'],                 // algemeen beheerder

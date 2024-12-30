@@ -9,17 +9,77 @@ if (!isset($_SESSION['user']['id'])) {
 $gebruiker_id = $_SESSION['user']['id'];
 $db = connect_db();
 
-// Query om totale waarde op te halen
-$query = "SELECT SUM(p.prijs * w.aantal) AS totaal_waarde
-          FROM winkelwagen w
-          JOIN producten p ON w.product_id = p.id
-          WHERE w.gebruiker_id = ?";
-$stmt = $db->prepare($query);
-$stmt->bind_param("i", $gebruiker_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$totaal_waarde = $result->fetch_assoc()['totaal_waarde'] ?? 0;
-$exclbtw = $totaal_waarde * 0.79;
+// Begin een database-transactie
+$db->begin_transaction();
+
+try {
+    // Stap 1: Bereken het totaalbedrag van de winkelwagen
+    $query = "SELECT SUM(p.prijs * w.aantal) AS totaal_waarde
+              FROM winkelwagen w
+              JOIN producten p ON w.product_id = p.id
+              WHERE w.gebruiker_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $gebruiker_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $totaal_waarde = $result->fetch_assoc()['totaal_waarde'] ?? 0;
+
+    if ($totaal_waarde <= 0) {
+        throw new Exception("Winkelwagen is leeg.");
+    }
+
+    $exclbtw = $totaal_waarde * 0.79;
+
+    // Stap 2: Voeg een nieuwe bestelling toe aan de `bestellingen`-tabel
+    $query = "INSERT INTO bestellingen (gebruiker_id, totaal_waarde, status, datum)
+              VALUES (?, ?, 'in behandeling', NOW())";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("id", $gebruiker_id, $totaal_waarde);
+    $stmt->execute();
+
+    // Haal het ID van de nieuwe bestelling op
+    $bestelling_id = $db->insert_id;
+
+    // Stap 3: Haal producten uit de winkelwagen op
+    $query = "SELECT w.product_id, w.aantal, p.prijs
+              FROM winkelwagen w
+              JOIN producten p ON w.product_id = p.id
+              WHERE w.gebruiker_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $gebruiker_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Stap 4: Voeg producten toe aan de `koppeltabel_bestelling_product`-tabel
+    $query = "INSERT INTO koppeltabel_bestelling_product (bestellingen_id, producten_id, aantal, prijs)
+              VALUES (?, ?, ?, ?)";
+    $stmt = $db->prepare($query);
+
+    while ($row = $result->fetch_assoc()) {
+        $product_id = $row['product_id'];
+        $aantal = $row['aantal'];
+        $prijs = $row['prijs'];
+
+        // Zorg dat je $bestelling_id gebruikt, niet $bestellingen_id
+        $stmt->bind_param("iiid", $bestelling_id, $product_id, $aantal, $prijs);
+        $stmt->execute();
+    }
+
+    // Stap 5: Leeg de winkelwagen
+    $query = "DELETE FROM winkelwagen WHERE gebruiker_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $gebruiker_id);
+    $stmt->execute();
+
+    // Commit de transactie
+    $db->commit();
+
+    echo "Bestelling succesvol geplaatst!";
+} catch (Exception $e) {
+    // Rol de transactie terug bij een fout
+    $db->rollback();
+    die("Er is een fout opgetreden: " . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
