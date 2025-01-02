@@ -1,5 +1,9 @@
 <?php
+
+require_once 'helpers/rolecheck.php';
+
 $conn = connect_db();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productnaam = $_POST['productnaam'] ?? '';
