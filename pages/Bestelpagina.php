@@ -1,17 +1,99 @@
+<?php
+require_once 'helpers/databaseconnector.php';
+
+// Controleer of de gebruiker is ingelogd
+if (!isset($_SESSION['user']['id'])) {
+    die("Gebruiker is niet ingelogd.");
+}
+
+$gebruiker_id = $_SESSION['user']['id'];
+$db = connect_db();
+
+// Begin een database-transactie
+$db->begin_transaction();
+
+try {
+    // Stap 1: Bereken het totaalbedrag van de winkelwagen
+    $query = "SELECT SUM(p.prijs * w.aantal) AS totaal_waarde
+              FROM winkelwagen w
+              JOIN producten p ON w.product_id = p.id
+              WHERE w.gebruiker_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $gebruiker_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $totaal_waarde = $result->fetch_assoc()['totaal_waarde'] ?? 0;
+
+    if ($totaal_waarde <= 0) {
+        throw new Exception("Winkelwagen is leeg.");
+    }
+
+    $exclbtw = $totaal_waarde * 0.79;
+
+    // Stap 2: Voeg een nieuwe bestelling toe aan de `bestellingen`-tabel
+    $query = "INSERT INTO bestellingen (gebruiker_id, totaal_waarde, status, datum)
+              VALUES (?, ?, 'in behandeling', NOW())";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("id", $gebruiker_id, $totaal_waarde);
+    $stmt->execute();
+
+    // Haal het ID van de nieuwe bestelling op
+    $bestelling_id = $db->insert_id;
+
+    // Stap 3: Haal producten uit de winkelwagen op
+    $query = "SELECT w.product_id, w.aantal, p.prijs
+              FROM winkelwagen w
+              JOIN producten p ON w.product_id = p.id
+              WHERE w.gebruiker_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $gebruiker_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Stap 4: Voeg producten toe aan de `koppeltabel_bestelling_product`-tabel
+    $query = "INSERT INTO koppeltabel_bestelling_product (bestellingen_id, producten_id, aantal, prijs)
+              VALUES (?, ?, ?, ?)";
+    $stmt = $db->prepare($query);
+
+    while ($row = $result->fetch_assoc()) {
+        $product_id = $row['product_id'];
+        $aantal = $row['aantal'];
+        $prijs = $row['prijs'];
+
+        // Zorg dat je $bestelling_id gebruikt, niet $bestellingen_id
+        $stmt->bind_param("iiid", $bestelling_id, $product_id, $aantal, $prijs);
+        $stmt->execute();
+    }
+
+    // Stap 5: Leeg de winkelwagen
+    $query = "DELETE FROM winkelwagen WHERE gebruiker_id = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $gebruiker_id);
+    $stmt->execute();
+
+    // Commit de transactie
+    $db->commit();
+
+    echo "Bestelling succesvol geplaatst!";
+} catch (Exception $e) {
+    // Rol de transactie terug bij een fout
+    $db->rollback();
+    die("Er is een fout opgetreden: " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bestelling Plaatsen</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-9">
-            <form method="POST" action="/submit_order" class="needs-validation" novalidate>
+            <form method="POST" action="/api/bestel/place_order.php" class="needs-validation" novalidate>
                 <!-- Voeg CSRF-token toe -->
                 <input type="hidden" name="csrf_token" value="PLACEHOLDER_FOR_CSRF_TOKEN">
 
@@ -116,19 +198,18 @@
         <div class="col-md-3">
             <!-- Samenvatting Bestelling -->
             <div class="card mb-4">
+
                 <div class="card-header"><h5>Samenvatting Bestelling</h5></div>
                 <div class="card-body">
-                    <p>Toegepaste korting: €20,-</p>
-                    <p>Prijs exclusief BTW: €79,-</p>
+                    <?php echo "<h5>Waarde excl btw €" . number_format($exclbtw, 2, ',', '.') . "</h5>"; ?>
                     <hr class="border-3">
-                    <p>Subtotaal: €80,- (incl. BTW)</p>
+                    <?php echo "<h3>Totaal €" . number_format($totaal_waarde, 2, ',', '.') . "</h3>"; ?>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Bootstrap validation script
     (function () {
