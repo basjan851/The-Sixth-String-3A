@@ -18,7 +18,9 @@ if (isset($_POST["id"], $_POST["title"])) {
     }
     $query = sprintf("UPDATE dynamische_pagina SET title = '%s', inhoud = %s, actief = %s WHERE id = %s;", $title, $inhoud ,$actief, $id);
     echo $query;
-    header('Location: /index.php?page=Paginaeditor', true, 302);
+    if ($dbcon->query(query: $query)) {
+        header('Location: /index.php?page=Beheerpaginas/Paginaeditor', true, 302);
+    }
 } else {
     header('HTTP/1.1 400 Bad Request', true, 400);
     echo "<h1>400 Bad Request</h1>";

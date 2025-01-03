@@ -8,21 +8,23 @@
         anders: aantal in tabel wordt naar $amount aangepast
         returnt een boolean die aangeeft of de operatie geslaagd is
         */
-        if (!empty($dbcon) && !empty($gebruikerid) && !empty($productid) && !empty($amount)) {
+        if (!empty($dbcon) && !empty($gebruikerid) && !empty($productid) && isset($amount)) {
             $gebruikerid = $dbcon->real_escape_string($gebruikerid);
             $productid = $dbcon->real_escape_string($productid);
             $amount = $dbcon->real_escape_string($amount);
 
             if ($amount == "remove") {
                 $query = "UPDATE winkelwagen SET aantal = aantal - 1 WHERE gebruiker_id = '" . $gebruikerid . "' AND product_id = '" . $productid . "'"; 
+            } elseif ($amount == 0) {
+                $query = "DELETE FROM winkelwagen WHERE gebruiker_id = '" . $dbcon->real_escape_string($gebruikerid) . "' AND product_id = '" . $productid . "'";
             } else {
                 $result = $dbcon->query("SELECT id FROM winkelwagen WHERE gebruiker_id = '". $gebruikerid . "' AND product_id = '" . $productid . "'");
                 if ($result->num_rows == 0) {
-                    echo "ball";
                     if ($amount == "append") { $amount = 1; }
                     $query = "INSERT winkelwagen (gebruiker_id, laatst_geupdate, product_id, aantal) VALUES ('" . $gebruikerid . "', NOW(), '" . $productid . "', '" .  $amount . "')";
                 } else {
-                    $query = "UPDATE winkelwagen SET aantal = aantal + 1 WHERE gebruiker_id = '" . $gebruikerid . "' AND product_id = '" . $productid . "'"; 
+                    if ($amount == "append") { $amount = "aantal + 1"; }
+                    $query = "UPDATE winkelwagen SET aantal = " . $amount . " WHERE gebruiker_id = '" . $gebruikerid . "' AND product_id = '" . $productid . "'"; 
                 }
             }
             $dbcon->query($query);
@@ -40,6 +42,7 @@
             totale_prijs: Totale prijs
             totale_korting: Totale prijs met korting
             producten: {
+                id:
                 productnaam:
                 prijs: prijs zonder korting (prijs*aantal)
                 korting: prijs met korting ((prijs/korting)*aantal)
@@ -55,7 +58,7 @@
                 $producten = $dbcon->query("SELECT p.id as id, p.productnaam as productnaam, p.prijs*w.aantal as prijs, (p.prijs*(p.kortingspercentage/100))*w.aantal as korting, w.aantal from winkelwagen w INNER JOIN producten p ON w.product_id = p.id WHERE w.gebruiker_id = '" . $gebruikerid . "'");
                 $p = array();
                 while ($row = $producten->fetch_assoc()) {
-                    $p[array_shift($row)] = $row;
+                    $p[] = $row;
                 }
                 return Array("totale_prijs" => $totaal["totale_prijs"], "totale_korting" => $totaal["totale_korting"], "producten" => $p);    
             } else {

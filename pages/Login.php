@@ -1,3 +1,9 @@
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+if (isset($_SESSION['user'])) {
+    header('Location: /index.php?page=Home', true, 302);
+}
+?>
 <style>
     #formparent {
         position: relative;

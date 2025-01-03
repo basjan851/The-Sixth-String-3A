@@ -14,7 +14,7 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                     <th scope="row">' . $row["id"] . '</th>
                     <td>' . $row["title"] . '</td>
                     <td>' . $actief . '</td>
-                    <td><a type="button" href="index.php?page=Paginaeditor&id=' . $row["id"] . '" class="btn btn-outline-primary btn-sm">Aanpassen</a></td>
+                    <td><a type="button" href="index.php?page=Beheerpaginas/Paginaeditor&id=' . $row["id"] . '" class="btn btn-outline-primary btn-sm">Aanpassen</a></td>
                 </tr>';
 };
 //Show page editor
@@ -30,7 +30,7 @@ if (!empty($_GET["id"])) {
             $checked = "";
         }    
         ob_start();
-        include "parts/Paginaeditor_detail.php";
+        include(__DIR__ . "/../parts/Paginaeditor_detail.php");
         $editorcontent = ob_get_clean();    
     }
 } else {

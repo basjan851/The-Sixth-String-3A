@@ -133,14 +133,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toevoegen'])) {
                         <div class="col-md-4 my-2">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= htmlspecialchars($row['productnaam']) ?></h5>
+                                    <h5 class="card-title"><a href="/index.php?page=Productdetail&id=<?= htmlspecialchars($row['id']) ?>"><?= htmlspecialchars($row['productnaam']) ?></a></h5>
                                     <p class="card-text"><?= htmlspecialchars($row['beschrijving']) ?></p>
                                     <p class="card-text"><?= htmlspecialchars($row['voorraad']) ?> op voorraad</p>
                                     <p class="text-success">€<?= htmlspecialchars($row['prijs']) ?></p>
-                                    <form method="post">
-                                        <input type="hidden" name="product_id" value="<?= htmlspecialchars($row['id']) ?>">
-                                        <button type="submit" name="toevoegen" class="btn btn-success">Toevoegen</button>
-                                    </form>
+                                    <a type="submit" name="toevoegen" class="btn btn-success" href="/api/winkelwagen.php?action=append&product_id=<?= htmlspecialchars($row['id']) ?>">In winkelwagen</a>
                                 </div>
                             </div>
                         </div>

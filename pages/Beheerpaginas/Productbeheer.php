@@ -121,7 +121,7 @@ if (!$result) {
                             <td><?= htmlspecialchars($row["productnaam"]) ?></td>
                             <td>€<?= htmlspecialchars($row["prijs"]) ?>,-</td>
                             <td><?= htmlspecialchars($row["voorraad"]) ?></td>
-                            <td><?= htmlspecialchars($row["kortingspercentage"]) ?>%</td>
+                            <td><?= htmlspecialchars($row["kortingspercentage"] ?? "0") ?>%</td>
                             <td>
                                 <form method="post">
                                     <input type="hidden" name="id" value="<?= $row["id"] ?>">
